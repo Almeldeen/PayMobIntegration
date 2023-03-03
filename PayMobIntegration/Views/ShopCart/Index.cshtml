@@ -1,0 +1,39 @@
+﻿@model List<CartItem>
+
+<div class="row">
+    <div class="col-12 mb-3">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Product</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Price</td>
+                            <td>@(item.Price * item.Quantity)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-12 mb-3 bg-info">
+        <hr/>
+        <label>Total:</label>
+        <label class="font-weight-bold">@(Model.Sum(x=>x.Price * x.Quantity))</label>
+    </div>
+    <div class="col-12">
+        <form asp-action="Checkout" asp-controller="Checkout" method="post">
+            <button class="btn btn-primary">Checkout</button>
+        </form>
+    </div>
+</div>
